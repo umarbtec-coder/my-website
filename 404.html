@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Gulf International Scrap Trading</title>
+
+    <script>
+      (function () {
+        var repo = "/my-website";
+
+        var path = window.location.pathname;
+        var search = window.location.search;
+        var hash = window.location.hash;
+
+        // Remove the repository name from the URL
+        var route = path.startsWith(repo)
+          ? path.slice(repo.length)
+          : path;
+
+        // Make sure the route starts with /
+        if (!route.startsWith("/")) {
+          route = "/" + route;
+        }
+
+        // Save the original route for React Router
+        sessionStorage.setItem(
+          "github-pages-redirect",
+          route + search + hash
+        );
+
+        // Go back to the React application's root
+        window.location.replace(repo + "/");
+      })();
+    </script>
+  </head>
+
+  <body>
+    <p>Loading...</p>
+  </body>
+</html>
