@@ -1,133 +1,320 @@
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import GIS from "../assets/images/GIS.png";
 
 function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goToSection = (sectionId) => {
+    // If already on Home, scroll directly
+    if (location.pathname === "/") {
+      document.getElementById(sectionId)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      // Navigate to Home first, then scroll
+      navigate("/");
+
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 300);
+    }
+  };
+
   return (
-    <footer className="bg-slate-950 text-gray-300 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-10 sm:py-12 lg:py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+    <footer className="relative bg-[#06080B] text-gray-300 border-t border-white/10 overflow-hidden">
 
-        {/* Company */}
-        <div>
-          <div className="flex items-center gap-3 mb-5">
-            <img
-              src={GIS}
-              alt="GIS Logo"
-              className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
-            />
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/5 blur-3xl rounded-full pointer-events-none"></div>
 
-            <h2 className="text-lg sm:text-xl font-bold text-white leading-tight">
-              Gulf International
-              <br />
-              Scrap Trading
-            </h2>
-          </div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-12 sm:py-14 lg:py-16">
 
-          <p className="text-sm sm:text-base text-gray-400 leading-7">
-            Trusted scrap metal recycling and trading company providing
-            reliable collection, industrial clearance, and environmentally
-            responsible recycling services across the UAE.
-          </p>
-        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="text-lg sm:text-xl font-semibold text-white mb-5">
-            Quick Links
-          </h3>
 
-          <ul className="space-y-3">
-            <li>
-              <a href="/#home" className="hover:text-orange-500 transition">
-                Home
-              </a>
-            </li>
+          {/* ================= COMPANY ================= */}
+          <div>
 
-            <li>
-              <a href="/#about" className="hover:text-orange-500 transition">
-                About
-              </a>
-            </li>
+            <div className="flex items-center gap-3 mb-6">
 
-            <li>
-              <a href="/#services" className="hover:text-orange-500 transition">
-                Services
-              </a>
-            </li>
+              <div className="relative">
 
-            <li>
-              <a href="/#materials" className="hover:text-orange-500 transition">
-                Materials
-              </a>
-            </li>
+                <div className="absolute inset-0 bg-orange-500/20 blur-lg rounded-full"></div>
 
-            <li>
-              <a href="/#contact" className="hover:text-orange-500 transition">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </div>
+                <img
+                  src={GIS}
+                  alt="GIS Logo"
+                  className="relative w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14 object-contain rounded-full"
+                />
 
-        {/* Services */}
-        <div>
-          <h3 className="text-lg sm:text-xl font-semibold text-white mb-5">
-            Our Services
-          </h3>
+              </div>
 
-          <ul className="space-y-3 text-sm sm:text-base">
-            <li>Scrap Collection</li>
-            <li>Industrial Site Clearance</li>
-            <li>Metal Trading</li>
-            <li>Scrap Recycling</li>
-            <li>Demolition Support</li>
-          </ul>
-        </div>
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold text-white leading-tight">
 
-        {/* Contact */}
-        <div>
-          <h3 className="text-lg sm:text-xl font-semibold text-white mb-5">
-            Contact
-          </h3>
+                Gulf International
+                <br />
 
-          <div className="space-y-4 text-sm sm:text-base">
-            <p>
-              📍 Musaffah - M42
-              <br />
-              Abu Dhabi
-              <br />
-              United Arab Emirates (UAE)
+                <span className="text-orange-500">
+                  Scrap Trading
+                </span>
+
+              </h2>
+
+            </div>
+
+
+            <p className="text-sm sm:text-base text-gray-500 leading-7 max-w-sm">
+
+              Trusted scrap metal recycling and trading company providing
+              reliable collection, industrial clearance and environmentally
+              responsible recycling services across the UAE.
+
             </p>
 
-            <p>📞 +971 XX XXX XXXX</p>
 
-            <p>✉️ umartrading5@gmail.com</p>
+            {/* Tagline */}
 
-            <p>
-              🕒 Mon - Sat
-              <br />
-              8:00 AM - 6:00 PM
-            </p>
+            <div className="mt-6 flex items-center gap-3">
+
+              <span className="w-8 h-px bg-orange-500"></span>
+
+              <span className="text-xs uppercase tracking-widest text-gray-500">
+                Professional • Reliable • Sustainable
+              </span>
+
+            </div>
+
           </div>
+
+
+          {/* ================= QUICK LINKS ================= */}
+          <div>
+
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-6">
+              Quick Links
+            </h3>
+
+            <ul className="space-y-3 text-sm sm:text-base">
+
+              <li>
+                <button
+                  onClick={() => goToSection("home")}
+                  className="group flex items-center gap-2 text-gray-500 hover:text-orange-500 transition cursor-pointer"
+                >
+                  <span className="text-orange-500 opacity-0 group-hover:opacity-100 transition">
+                    →
+                  </span>
+                  Home
+                </button>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => goToSection("about")}
+                  className="group flex items-center gap-2 text-gray-500 hover:text-orange-500 transition cursor-pointer"
+                >
+                  <span className="text-orange-500 opacity-0 group-hover:opacity-100 transition">
+                    →
+                  </span>
+                  About
+                </button>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => goToSection("services")}
+                  className="group flex items-center gap-2 text-gray-500 hover:text-orange-500 transition cursor-pointer"
+                >
+                  <span className="text-orange-500 opacity-0 group-hover:opacity-100 transition">
+                    →
+                  </span>
+                  Services
+                </button>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => goToSection("materials")}
+                  className="group flex items-center gap-2 text-gray-500 hover:text-orange-500 transition cursor-pointer"
+                >
+                  <span className="text-orange-500 opacity-0 group-hover:opacity-100 transition">
+                    →
+                  </span>
+                  Materials
+                </button>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => goToSection("contact")}
+                  className="group flex items-center gap-2 text-gray-500 hover:text-orange-500 transition cursor-pointer"
+                >
+                  <span className="text-orange-500 opacity-0 group-hover:opacity-100 transition">
+                    →
+                  </span>
+                  Contact
+                </button>
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          {/* ================= SERVICES ================= */}
+          <div>
+
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-6">
+              Our Services
+            </h3>
+
+            <ul className="space-y-3 text-sm sm:text-base text-gray-500">
+
+              <li className="hover:text-orange-500 transition">
+                Scrap Collection
+              </li>
+
+              <li className="hover:text-orange-500 transition">
+                Industrial Site Clearance
+              </li>
+
+              <li className="hover:text-orange-500 transition">
+                Trading
+              </li>
+
+              <li className="hover:text-orange-500 transition">
+                Scrap Recycling
+              </li>
+
+              <li className="hover:text-orange-500 transition">
+                Demolition Support
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          {/* ================= CONTACT ================= */}
+          <div>
+
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-6">
+              Contact
+            </h3>
+
+
+            <div className="space-y-5 text-sm sm:text-base">
+
+
+              {/* Address */}
+
+              <div className="flex gap-3">
+
+                <span className="flex-shrink-0 w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
+                  📍
+                </span>
+
+                <p className="text-gray-500 leading-6">
+
+                  Musaffah - M42
+                  <br />
+                  Abu Dhabi
+                  <br />
+                  United Arab Emirates (UAE)
+
+                </p>
+
+              </div>
+
+
+              {/* Phone */}
+
+              <div className="flex items-center gap-3">
+
+                <span className="flex-shrink-0 w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
+                  📞
+                </span>
+
+                <p className="text-gray-500">
+                  +971 0551945353
+                </p>
+
+              </div>
+
+
+              {/* Email */}
+
+              <div className="flex items-center gap-3">
+
+                <span className="flex-shrink-0 w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
+                  ✉️
+                </span>
+
+                <p className="text-gray-500 break-all">
+                  info@gulfscraps.com
+                </p>
+
+              </div>
+
+
+              {/* Hours */}
+
+              <div className="flex gap-3">
+
+                <span className="flex-shrink-0 w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
+                  🕒
+                </span>
+
+                <p className="text-gray-500 leading-6">
+
+                  Mon - Sat
+                  <br />
+                  8:00 AM - 6:00 PM
+
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
 
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
 
-          <p className="text-xs sm:text-sm text-gray-400">
-            © {new Date().getFullYear()} Gulf International Scrap Trading Sole Proprietorship L.L.C.
-            <br className="sm:hidden" />
-            <span className="hidden sm:inline"> </span>
-            All Rights Reserved.
+      {/* ================= COPYRIGHT ================= */}
+
+      <div className="relative border-t border-white/10">
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-5 flex flex-col md:flex-row justify-between items-center gap-3">
+
+          <p className="text-xs sm:text-sm text-gray-600 text-center md:text-left">
+
+            © {new Date().getFullYear()} Gulf International Scrap Trading
+            Sole Proprietorship L.L.C. All Rights Reserved.
+
           </p>
 
-          <p className="text-xs sm:text-sm text-gray-500 mt-3 md:mt-0">
-            Designed by: Umar Khan
+
+          <p className="text-xs sm:text-sm text-gray-600">
+
+            Designed by:{" "}
+            <span className="text-orange-500">
+              Umar Khan
+            </span>
+
           </p>
 
         </div>
+
       </div>
+
     </footer>
   );
 }
